@@ -343,6 +343,13 @@ class Qwen3VLAutoTagger:
                         "tooltip": "Maximum vision resolution budget.",
                     },
                 ),
+                "allow_resize": (
+                    "BOOLEAN",
+                    {
+                        "default": True,
+                        "tooltip": "Allow processor to resize images to valid patch sizes.",
+                    },
+                ),
                 "model_id": (
                     "STRING",
                     {
@@ -408,6 +415,7 @@ class Qwen3VLAutoTagger:
         attempts,
         min_pixels,
         max_pixels,
+        allow_resize,
         model_id,
         auto_download,
         local_model,
@@ -470,7 +478,7 @@ class Qwen3VLAutoTagger:
                     videos=video_inputs,
                     padding=True,
                     return_tensors="pt",
-                    do_resize=False,
+                    do_resize=bool(allow_resize),
                 )
             except TypeError:
                 inputs = processor(

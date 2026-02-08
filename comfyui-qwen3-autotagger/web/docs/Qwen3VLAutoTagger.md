@@ -13,6 +13,7 @@ Generates Adobe Stock-style metadata (title + keywords) from an input image usin
 - `attempts`: Retry count if JSON is invalid.
 - `min_pixels`: Minimum vision resolution budget.
 - `max_pixels`: Maximum vision resolution budget.
+- `allow_resize`: Allow processor to resize images to valid patch sizes.
 - `model_id`: HF model id (used when auto-download is enabled).
 - `auto_download`: Allow downloading the model from Hugging Face on first run.
 - `local_model`: Pick a local model under `models/LLM` (or `models/llm`). This is a convenience convention for this node.

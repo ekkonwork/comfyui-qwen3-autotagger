@@ -29,6 +29,7 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 - `temperature`, `top_p`, `repetition_penalty`: Sampling controls.
 - `attempts` (INT): Retry count if JSON is invalid.
 - `min_pixels`, `max_pixels` (INT): Vision resize constraints.
+- `allow_resize` (BOOLEAN): Allow processor to resize images to valid patch sizes.
 - `model_id` (STRING): Hugging Face model ID (default `Qwen/Qwen3-VL-8B-Instruct`).
 - `auto_download` (BOOLEAN): Allow downloading the model on first run.
 - `local_model` (CHOICE): Local model under `models/LLM` or `models/llm` (or `(manual)`).
