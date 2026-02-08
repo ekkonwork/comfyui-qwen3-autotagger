@@ -71,4 +71,6 @@ Then set:
 ## Example Workflow
 
 An example workflow is included in `example_workflows/`.
+
+For headless/API runs, use `example_workflows/Qwen3VLAutoTagger_api.json`.
 Open it in ComfyUI via `Workflow -> Browse Workflow Templates`.
