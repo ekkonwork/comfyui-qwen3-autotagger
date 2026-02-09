@@ -13,6 +13,7 @@ pip install -r custom_nodes/comfyui-qwen3-autotagger/requirements.txt
 ```
 
 3. Install `exiftool` (required for XMP embedding) and ensure it is in `PATH`.
+   - On Linux you can also run `python install.py` to auto-install (uses `apt-get`).
 4. Restart ComfyUI.
 
 ## Quick Start (Git)
@@ -20,6 +21,7 @@ pip install -r custom_nodes/comfyui-qwen3-autotagger/requirements.txt
 ```bash
 git clone https://github.com/ekkonwork/comfyui-qwen3-autotagger ComfyUI/custom_nodes/comfyui-qwen3-autotagger
 pip install -r ComfyUI/custom_nodes/comfyui-qwen3-autotagger/requirements.txt
+python ComfyUI/custom_nodes/comfyui-qwen3-autotagger/install.py
 ```
 
 ## Node
