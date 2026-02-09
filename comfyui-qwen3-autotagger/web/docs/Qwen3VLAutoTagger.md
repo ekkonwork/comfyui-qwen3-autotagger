@@ -37,4 +37,5 @@ Generates Adobe Stock-style metadata (title + keywords) from an input image usin
 - 4-bit quantization requires CUDA.
 - `LLM` is not a standard ComfyUI model subfolder; use `local_model_path` if you keep models elsewhere.
 - When `write_xmp` is enabled, the node saves tagged images itself and returns them as UI outputs (no separate SaveImage needed).
+- Default model download size is ~17.5 GB; on a Colab T4, a single image is usually ~60s.
 - If `exiftool` is missing, images are saved without XMP metadata.

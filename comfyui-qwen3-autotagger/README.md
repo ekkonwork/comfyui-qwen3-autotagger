@@ -57,6 +57,14 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 - 4-bit quantization requires CUDA; on CPU it will fall back to full precision.
 - If `exiftool` is missing, images will be saved without XMP metadata.
 
+## Model Download Size
+
+The default model (`Qwen/Qwen3-VL-8B-Instruct`) downloads about **17.5 GB** of weights in total (roughly **16.3 GiB**). citeturn4search10
+
+## Performance
+
+On a Colab T4, a single image typically takes ~60 seconds to auto‑tag (varies with resolution and settings).
+
 ## Local Model Loading
 
 If you already have the model downloaded, you can place it under:
