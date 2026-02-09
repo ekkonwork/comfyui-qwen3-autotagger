@@ -31,7 +31,8 @@
       "output_dir": "",
       "output_format": "jpg",
       "file_prefix": "qwen3_autotag",
-      "require_exiftool": true
+      "require_exiftool": true,
+      "log_tags": true
     }
   }
 }

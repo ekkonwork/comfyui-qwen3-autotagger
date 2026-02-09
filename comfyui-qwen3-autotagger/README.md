@@ -37,6 +37,7 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 - `load_in_4bit` (BOOLEAN): Use 4-bit quantization if available.
 - `write_xmp` (BOOLEAN): Save files and embed XMP metadata with `exiftool` (default: true).
 - `require_exiftool` (BOOLEAN): Fail if `exiftool` is missing when `write_xmp` is enabled.
+- `log_tags` (BOOLEAN): Print title + keyword preview in ComfyUI console.
 - `output_dir` (STRING): Output directory (empty uses ComfyUI output dir).
 - `output_format` (STRING): `jpg`, `png`, or `webp`.
 - `file_prefix` (STRING): Output filename prefix.

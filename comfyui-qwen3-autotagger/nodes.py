@@ -425,6 +425,10 @@ class Qwen3VLAutoTagger:
                     "BOOLEAN",
                     {"default": True, "tooltip": "Fail if exiftool is missing when write_xmp is enabled."},
                 ),
+                "log_tags": (
+                    "BOOLEAN",
+                    {"default": False, "tooltip": "Log title and keywords to the ComfyUI console."},
+                ),
                 "output_dir": (
                     "STRING",
                     {"default": "", "tooltip": "Save directory. Empty uses ComfyUI output dir."},
@@ -466,6 +470,7 @@ class Qwen3VLAutoTagger:
         load_in_4bit,
         write_xmp,
         require_exiftool,
+        log_tags,
         output_dir,
         output_format,
         file_prefix,
@@ -572,6 +577,12 @@ class Qwen3VLAutoTagger:
                         raw_json = json.dumps({"title": title, "keywords": final_keywords}, ensure_ascii=False)
                         if len(final_keywords) < 5 and attempt < (attempts - 1):
                             continue
+                        if log_tags:
+                            preview = ", ".join(final_keywords[:20])
+                            print(
+                                f"[Qwen3VLAutoTagger] #{idx} title='{title}' "
+                                f"keywords({len(final_keywords)}): {preview}"
+                            )
                         break
                 except Exception as e:
                     if attempt == attempts - 1:

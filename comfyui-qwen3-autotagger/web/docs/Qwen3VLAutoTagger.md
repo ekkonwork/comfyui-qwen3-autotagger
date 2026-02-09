@@ -21,6 +21,7 @@ Generates Adobe Stock-style metadata (title + keywords) from an input image usin
 - `load_in_4bit`: Enable 4-bit quantization (CUDA only).
 - `write_xmp`: Embed XMP metadata via `exiftool` (default: true).
 - `require_exiftool`: Fail if `exiftool` is missing when `write_xmp` is enabled.
+- `log_tags`: Print title + keyword preview in ComfyUI console.
 - `output_dir`: Save directory. Empty uses ComfyUI output dir.
 - `output_format`: Output format (`jpg`, `png`, `webp`).
 - `file_prefix`: Output filename prefix.
