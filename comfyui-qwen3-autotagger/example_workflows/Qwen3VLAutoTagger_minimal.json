@@ -115,6 +115,7 @@
         "",
         true,
         false,
+        true,
         "",
         "jpg",
         "qwen3_autotag"

@@ -36,6 +36,7 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 - `local_model_path` (STRING): Full path to a local model folder (used when `local_model` is `(manual)`).
 - `load_in_4bit` (BOOLEAN): Use 4-bit quantization if available.
 - `write_xmp` (BOOLEAN): Save files and embed XMP metadata with `exiftool` (default: true).
+- `require_exiftool` (BOOLEAN): Fail if `exiftool` is missing when `write_xmp` is enabled.
 - `output_dir` (STRING): Output directory (empty uses ComfyUI output dir).
 - `output_format` (STRING): `jpg`, `png`, or `webp`.
 - `file_prefix` (STRING): Output filename prefix.
@@ -73,4 +74,9 @@ Then set:
 An example workflow is included in `example_workflows/`.
 
 For headless/API runs, use `example_workflows/Qwen3VLAutoTagger_api.json`.
+
+## Output Behavior
+
+When `write_xmp` is enabled, the node saves tagged images itself and returns them as ComfyUI outputs (no need to add `SaveImage`).
+If you set a custom `output_dir` outside ComfyUI's output folder, the UI preview may not show the image.
 Open it in ComfyUI via `Workflow -> Browse Workflow Templates`.

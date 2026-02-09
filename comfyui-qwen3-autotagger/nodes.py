@@ -230,12 +230,42 @@ def _get_model_and_processor(
     return model, processor, device
 
 
-def _save_with_xmp(pil: Image.Image, title: str, keywords: List[str], output_dir: str, prefix: str, index: int, fmt: str):
-    if not output_dir:
-        if folder_paths is not None:
-            output_dir = folder_paths.get_output_directory()
-        else:
-            output_dir = os.getcwd()
+def _resolve_output_dir(output_dir: str) -> str:
+    if output_dir:
+        return output_dir
+    if folder_paths is not None:
+        try:
+            return folder_paths.get_output_directory()
+        except Exception:
+            pass
+    return os.getcwd()
+
+
+def _ui_image_entry(path: str, output_dir: str):
+    if folder_paths is None:
+        return None
+    try:
+        base = folder_paths.get_output_directory()
+        rel = os.path.relpath(os.path.dirname(path), base)
+        if rel.startswith(".."):
+            return None
+        subfolder = "" if rel in (".", "") else rel.replace("\\", "/")
+        return {"filename": os.path.basename(path), "subfolder": subfolder, "type": "output"}
+    except Exception:
+        return None
+
+
+def _save_with_xmp(
+    pil: Image.Image,
+    title: str,
+    keywords: List[str],
+    output_dir: str,
+    prefix: str,
+    index: int,
+    fmt: str,
+    require_exiftool: bool,
+):
+    output_dir = _resolve_output_dir(output_dir)
 
     os.makedirs(output_dir, exist_ok=True)
     safe_prefix = re.sub(r"[^a-zA-Z0-9_-]", "_", prefix) if prefix else "autotag"
@@ -255,9 +285,14 @@ def _save_with_xmp(pil: Image.Image, title: str, keywords: List[str], output_dir
 
     pil.save(path, format=fmt, **save_kwargs)
 
+    ui_entry = _ui_image_entry(path, output_dir)
+
     if shutil.which("exiftool") is None:
-        print("exiftool not found in PATH; skipping XMP embedding")
-        return path
+        msg = "exiftool not found in PATH; skipping XMP embedding"
+        if require_exiftool:
+            raise RuntimeError(msg)
+        print(msg)
+        return path, ui_entry
 
     if len(title) > 199:
         title = title[:199]
@@ -275,8 +310,11 @@ def _save_with_xmp(pil: Image.Image, title: str, keywords: List[str], output_dir
         f"-XMP-dc:Subject={keywords_str}",
         path,
     ]
-    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-    return path
+    result = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    if result.returncode != 0 and require_exiftool:
+        err = result.stderr.decode("utf-8", errors="ignore") if result.stderr else "Unknown error"
+        raise RuntimeError(f"exiftool failed: {err}")
+    return path, ui_entry
 
 
 class Qwen3VLAutoTagger:
@@ -383,6 +421,10 @@ class Qwen3VLAutoTagger:
                     {"default": True, "tooltip": "Enable 4-bit quantization (CUDA only)."},
                 ),
                 "write_xmp": ("BOOLEAN", {"default": True, "tooltip": "Embed XMP metadata via exiftool."}),
+                "require_exiftool": (
+                    "BOOLEAN",
+                    {"default": True, "tooltip": "Fail if exiftool is missing when write_xmp is enabled."},
+                ),
                 "output_dir": (
                     "STRING",
                     {"default": "", "tooltip": "Save directory. Empty uses ComfyUI output dir."},
@@ -402,6 +444,7 @@ class Qwen3VLAutoTagger:
     RETURN_NAMES = ("image", "title", "keywords", "json", "xmp_paths")
     FUNCTION = "tag"
     CATEGORY = "Metadata"
+    OUTPUT_NODE = True
 
     def tag(
         self,
@@ -422,6 +465,7 @@ class Qwen3VLAutoTagger:
         local_model_path,
         load_in_4bit,
         write_xmp,
+        require_exiftool,
         output_dir,
         output_format,
         file_prefix,
@@ -449,6 +493,7 @@ class Qwen3VLAutoTagger:
         keywords_out = []
         json_out = []
         xmp_paths = []
+        ui_images = []
 
         for idx in range(batch_size):
             pil, b64 = _tensor_to_pil_and_base64(image[idx])
@@ -540,14 +585,27 @@ class Qwen3VLAutoTagger:
             json_out.append(raw_json)
 
             if write_xmp:
-                path = _save_with_xmp(pil, title, final_keywords, output_dir, file_prefix, idx, output_format)
+                path, ui_entry = _save_with_xmp(
+                    pil,
+                    title,
+                    final_keywords,
+                    output_dir,
+                    file_prefix,
+                    idx,
+                    output_format,
+                    require_exiftool=bool(require_exiftool),
+                )
                 xmp_paths.append(path)
+                if ui_entry is not None:
+                    ui_images.append(ui_entry)
 
         titles_str = "\n".join(titles)
         keywords_str = "\n".join(keywords_out)
         json_str = "\n".join(json_out)
         xmp_paths_str = "\n".join(xmp_paths) if xmp_paths else ""
 
+        if ui_images:
+            return {"ui": {"images": ui_images}, "result": (image, titles_str, keywords_str, json_str, xmp_paths_str)}
         return (image, titles_str, keywords_str, json_str, xmp_paths_str)
 
 
