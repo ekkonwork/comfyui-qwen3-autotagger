@@ -382,7 +382,7 @@ class Qwen3VLAutoTagger:
                     "BOOLEAN",
                     {"default": True, "tooltip": "Enable 4-bit quantization (CUDA only)."},
                 ),
-                "write_xmp": ("BOOLEAN", {"default": False, "tooltip": "Embed XMP metadata via exiftool."}),
+                "write_xmp": ("BOOLEAN", {"default": True, "tooltip": "Embed XMP metadata via exiftool."}),
                 "output_dir": (
                     "STRING",
                     {"default": "", "tooltip": "Save directory. Empty uses ComfyUI output dir."},

@@ -35,7 +35,7 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 - `local_model` (CHOICE): Local model under `models/LLM` or `models/llm` (or `(manual)`).
 - `local_model_path` (STRING): Full path to a local model folder (used when `local_model` is `(manual)`).
 - `load_in_4bit` (BOOLEAN): Use 4-bit quantization if available.
-- `write_xmp` (BOOLEAN): Save files and embed XMP metadata with `exiftool`.
+- `write_xmp` (BOOLEAN): Save files and embed XMP metadata with `exiftool` (default: true).
 - `output_dir` (STRING): Output directory (empty uses ComfyUI output dir).
 - `output_format` (STRING): `jpg`, `png`, or `webp`.
 - `file_prefix` (STRING): Output filename prefix.
