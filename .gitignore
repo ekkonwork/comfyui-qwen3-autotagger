@@ -22,6 +22,10 @@ Thumbs.db
 *.tif
 *.tiff
 
+# Allow repo assets
+!assets/
+!assets/**
+
 # Local notes
 PROJECT_NOTES.txt
 STATUS.txt

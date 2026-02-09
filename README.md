@@ -92,10 +92,22 @@ Then set:
 - `example_workflows/Qwen3VLAutoTagger_minimal.json`
 - `example_workflows/Qwen3VLAutoTagger_api.json`
 
-## Publishing Notes
+## Screenshots
 
-This repository is structured as a ComfyUI custom node root. If you see a nested folder named
-`comfyui-qwen3-autotagger`, it is a legacy artifact from early development and can be removed later.
+Node UI
+![Node UI](assets/Node_only_screen.png)
+
+Workflow Example
+![Workflow Example](assets/Workflow_Screen.png)
+
+Embedded XMP Metadata
+![Metadata Screenshot](assets/metadata_screenshot.png)
+
+Adobe Stock Result Example 1
+![Adobe Stock Result 1](assets/on_stock_tags1.png)
+
+Adobe Stock Result Example 2
+![Adobe Stock Result 2](assets/on_stock_tags2.png)
 
 ## License
 
