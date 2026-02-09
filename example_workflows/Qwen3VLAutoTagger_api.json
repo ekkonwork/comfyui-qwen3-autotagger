@@ -1,0 +1,38 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "test.png"
+    }
+  },
+  "2": {
+    "class_type": "Qwen3VLAutoTagger",
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "system_prompt": "You are an Adobe Stock metadata generator.\nReturn ONLY a valid JSON object.\nStructure: {\"title\": \"English title max 150 chars\", \"keywords\": [\"tag1\", \"tag2\", \"tag3\"]}\nRules:\n1. GENERATE ~60 KEYWORDS. Include synonyms, visual details, concepts.\n2. PREFER SINGLE WORDS where possible.\n3. Output raw JSON only.\n",
+      "max_keywords": 50,
+      "max_new_tokens": 600,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15,
+      "attempts": 3,
+      "min_pixels": 200704,
+      "max_pixels": 571536,
+      "allow_resize": true,
+      "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+      "auto_download": true,
+      "local_model": "(manual)",
+      "local_model_path": "",
+      "load_in_4bit": true,
+      "write_xmp": true,
+      "output_dir": "",
+      "output_format": "jpg",
+      "file_prefix": "qwen3_autotag",
+      "require_exiftool": true,
+      "log_tags": true
+    }
+  }
+}

@@ -1,0 +1,6 @@
+transformers @ git+https://github.com/huggingface/transformers
+qwen-vl-utils>=0.0.14
+accelerate>=0.30.0
+bitsandbytes>=0.43.0
+Pillow>=10.0.0
+numpy>=1.24.0

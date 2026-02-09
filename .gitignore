@@ -1,0 +1,30 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Notebooks and test artifacts
+*.ipynb
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.tif
+*.tiff
+
+# Local notes
+PROJECT_NOTES.txt
+STATUS.txt
+*_cell.txt
+notebook_code_cells.txt
+seedvr2_code_cells.txt
