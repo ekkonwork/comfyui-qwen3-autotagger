@@ -3,7 +3,7 @@
 [![Donate on Boosty](https://img.shields.io/badge/Donate-Boosty-F15F2C?style=for-the-badge)](https://boosty.to/ekkonwork/donate)
 [![Hire Me on LinkedIn](https://img.shields.io/badge/Hire%20Me-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mikhail-kuznetsov-14304433b)
 
-![Qwen3 VL AutoTagger](assets/banner_tagger_for_stock.png)
+![Qwen3 VL AutoTagger](assets/banner_tagger_for_stock.webp)
 
 Generate Adobe Stock-style title + keywords with Qwen3-VL and embed XMP metadata directly into outputs.
 
@@ -119,6 +119,8 @@ Then in the node set:
 
 If this node saves you time, you can support development on Boosty:
 
+[![Donate](assets/Donate_Banner.webp)](https://boosty.to/ekkonwork/donate)
+
 [![Donate on Boosty](https://img.shields.io/badge/Donate-Boosty-F15F2C?style=for-the-badge)](https://boosty.to/ekkonwork/donate)
 
 - Boosty (donate): `https://boosty.to/ekkonwork/donate`
@@ -144,6 +146,8 @@ Open to collaboration and work opportunities in AI tooling and automation.
 
 ## Hire Me
 
+[![Hire Me](assets/Hire_Me_banner.webp)](https://www.linkedin.com/in/mikhail-kuznetsov-14304433b)
+
 [![Hire Me on LinkedIn](https://img.shields.io/badge/Hire%20Me-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mikhail-kuznetsov-14304433b)
 
 - English: `B2` (text-first communication).
@@ -153,21 +157,6 @@ Open to collaboration and work opportunities in AI tooling and automation.
 - Telegram: `@Mikhail_ML_ComfyUI`
 - LinkedIn: `https://www.linkedin.com/in/mikhail-kuznetsov-14304433b`
 - Boosty: `https://boosty.to/ekkonwork/donate`
-
-## Suggested New Screenshots
-
-Please add these (PNG, 1600x900 or 1920x1080):
-
-1. `assets/Save_vs_NoSaveImage.png`
-`write_xmp=true` flow where this node saves output without separate `SaveImage`.
-2. `assets/Output_Naming_NoOverwrite.png`
-Output folder showing incremental names (`qwen3_autotag_00000`, `00001`, `00002`) to prove no overwrite.
-3. `assets/Custom_OutputDir_Preview_Note.png`
-Example where custom `output_dir` is outside Comfy output and preview is not shown in UI.
-4. `assets/Local_Model_Selector_LLM.png`
-Node UI highlighting `auto_download=false` + `local_model` dropdown with `LLM/...`.
-5. `assets/HireMe_Donate_Banner.png`
-A clean contact banner with Boosty + LinkedIn for the top of README.
 
 ## Example Workflows
 
