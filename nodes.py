@@ -255,6 +255,26 @@ def _ui_image_entry(path: str, output_dir: str):
         return None
 
 
+def _normalize_output_format(fmt: str) -> Tuple[str, str]:
+    ext = (fmt or "png").strip().lower()
+    if ext in {"jpg", "jpeg"}:
+        return "jpg", "JPEG"
+    if ext == "webp":
+        return "webp", "WEBP"
+    return "png", "PNG"
+
+
+def _build_unique_output_path(output_dir: str, prefix: str, index: int, ext: str) -> str:
+    safe_prefix = re.sub(r"[^a-zA-Z0-9_-]", "_", prefix) if prefix else "autotag"
+    next_index = max(0, int(index))
+    while True:
+        filename = f"{safe_prefix}_{next_index:05d}.{ext}"
+        path = os.path.join(output_dir, filename)
+        if not os.path.exists(path):
+            return path
+        next_index += 1
+
+
 def _save_with_xmp(
     pil: Image.Image,
     title: str,
@@ -268,22 +288,17 @@ def _save_with_xmp(
     output_dir = _resolve_output_dir(output_dir)
 
     os.makedirs(output_dir, exist_ok=True)
-    safe_prefix = re.sub(r"[^a-zA-Z0-9_-]", "_", prefix) if prefix else "autotag"
-    filename = f"{safe_prefix}_{index:05d}.{fmt}"
-    path = os.path.join(output_dir, filename)
+    file_ext, save_format = _normalize_output_format(fmt)
+    path = _build_unique_output_path(output_dir, prefix, index, file_ext)
 
     save_kwargs = {}
-    if fmt.lower() in {"jpg", "jpeg"}:
+    if save_format == "JPEG":
         save_kwargs["quality"] = 95
         save_kwargs["subsampling"] = 0
-        fmt = "JPEG"
-    elif fmt.lower() == "webp":
+    elif save_format == "WEBP":
         save_kwargs["quality"] = 95
-        fmt = "WEBP"
-    else:
-        fmt = "PNG"
 
-    pil.save(path, format=fmt, **save_kwargs)
+    pil.save(path, format=save_format, **save_kwargs)
 
     ui_entry = _ui_image_entry(path, output_dir)
 

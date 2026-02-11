@@ -7,7 +7,7 @@ Generate Adobe Stock-style title + keywords with Qwen3-VL and embed XMP metadata
 ## Highlights
 
 - Auto-tags images (title + ~60 keywords)
-- Saves tagged images with XMP metadata (no SaveImage needed)
+- Saves tagged images with XMP metadata when `write_xmp` is enabled (no `SaveImage` needed)
 - Headless/API workflow included
 - Optional 4-bit quantization (CUDA)
 
@@ -67,7 +67,7 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 - `allow_resize` (BOOLEAN): Allow processor to resize images to valid patch sizes.
 - `model_id` (STRING): Hugging Face model ID (default `Qwen/Qwen3-VL-8B-Instruct`).
 - `auto_download` (BOOLEAN): Allow downloading the model on first run.
-- `local_model` (CHOICE): Local model under `models/LLM` or `models/llm` (or `(manual)`).
+- `local_model` (CHOICE): Select a local model folder from `models/LLM` or `models/llm` (or `(manual)`).
 - `local_model_path` (STRING): Full path to a local model folder (used when `local_model` is `(manual)`).
 - `load_in_4bit` (BOOLEAN): Use 4-bit quantization if available.
 - `write_xmp` (BOOLEAN): Save files and embed XMP metadata with `exiftool` (default: true).
@@ -88,6 +88,8 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 ## Output Behavior
 
 When `write_xmp` is enabled, the node saves tagged images itself and returns them as ComfyUI outputs (no need to add `SaveImage`).
+When `write_xmp` is disabled, the node does not save files.
+Saved filenames are auto-incremented (`file_prefix_00000`, `file_prefix_00001`, ...) and existing files are not overwritten.
 If you set a custom `output_dir` outside ComfyUI's output folder, the UI preview may not show the image.
 
 ## Model Download Size
@@ -98,19 +100,46 @@ The default model (`Qwen/Qwen3-VL-8B-Instruct`) downloads about 17.5 GB of weigh
 
 On a Colab T4, a single image typically takes about 60 seconds to auto-tag (varies with resolution and settings).
 
-## Local Model Loading
+## Local Model Selection in Node
 
-If you already have the model downloaded, you can place it under:
+If you already have the model downloaded, place it under:
 
 - `ComfyUI/models/LLM/<YourModelFolder>` or `ComfyUI/models/llm/<YourModelFolder>`
 
-Note: `LLM` is not part of the official default model subfolders in ComfyUI, so this is a convenience convention for this node.
-You can instead use a custom location via `local_model_path`.
-
-Then set:
+Then in the node set:
 
 - `auto_download = false`
-- `local_model = LLM/<YourModelFolder>` (or use `local_model_path` for a custom location)
+- `local_model = LLM/<YourModelFolder>` (the same folder you choose in the node dropdown)
+- or use `local_model_path` for a custom location
+
+## Support
+
+If this node saves you time, you can support development on Boosty:
+
+- Boosty (donate): `https://boosty.to/ekkonwork/donate`
+- LinkedIn: `https://www.linkedin.com/in/mikhail-kuznetsov-14304433b`
+
+Suggested tiers for an English-speaking audience (USD):
+
+- `$5`: Tip jar - support ongoing development.
+- `$15`: Power user - priority issue replies and workflow help.
+- `$35`: Pro supporter - short monthly Q&A / setup guidance.
+
+## About the Author
+
+Built by Mikhail Kuznetsov (`ekkonwork`).
+
+I build practical AI tooling around image workflows, including ComfyUI custom nodes,
+metadata automation, and production-focused workflow improvements.
+Open to collaboration and work opportunities in AI tooling and automation.
+
+## Hire Me
+
+- English: `B2` (text-first communication).
+- Hiring (full-time/long-term): prefer written communication or Russian-speaking teams for live calls.
+- Project work: open to worldwide async collaboration.
+- LinkedIn: `https://www.linkedin.com/in/mikhail-kuznetsov-14304433b`
+- Boosty: `https://boosty.to/ekkonwork/donate`
 
 ## Example Workflows
 

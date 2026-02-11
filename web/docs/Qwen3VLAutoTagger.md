@@ -16,7 +16,7 @@ Generates Adobe Stock-style metadata (title + keywords) from an input image usin
 - `allow_resize`: Allow processor to resize images to valid patch sizes.
 - `model_id`: HF model id (used when auto-download is enabled).
 - `auto_download`: Allow downloading the model from Hugging Face on first run.
-- `local_model`: Pick a local model under `models/LLM` (or `models/llm`). This is a convenience convention for this node.
+- `local_model`: Select a local model folder from `models/LLM` (or `models/llm`).
 - `local_model_path`: Full path to a local model folder (used when `local_model` is `(manual)`).
 - `load_in_4bit`: Enable 4-bit quantization (CUDA only).
 - `write_xmp`: Embed XMP metadata via `exiftool` (default: true).
@@ -35,8 +35,10 @@ Generates Adobe Stock-style metadata (title + keywords) from an input image usin
 
 ## Notes
 - 4-bit quantization requires CUDA.
-- `LLM` is not a standard ComfyUI model subfolder; use `local_model_path` if you keep models elsewhere.
 - When `write_xmp` is enabled, the node saves tagged images itself and returns them as UI outputs (no separate SaveImage needed).
+- When `write_xmp` is disabled, the node does not save files.
+- Saved filenames are auto-incremented and existing files are not overwritten.
 - Default model download size is ~17.5 GB; on a Colab T4, a single image is usually ~60s.
 - If `exiftool` is missing, images are saved without XMP metadata.
+- If `output_dir` is outside ComfyUI output, UI preview may not show saved images.
 - You can run `python install.py` on Linux to auto-install exiftool (uses apt-get).
