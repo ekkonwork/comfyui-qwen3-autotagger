@@ -121,23 +121,29 @@ If this node saves you time, you can support development on Boosty:
 
 Suggested tiers for an English-speaking audience (USD):
 
-- `$5`: Tip jar - support ongoing development.
-- `$15`: Power user - priority issue replies and workflow help.
-- `$35`: Pro supporter - short monthly Q&A / setup guidance.
+- `$7`: Tip jar - support ongoing development.
+- `$19`: Power user - priority issue replies and workflow help.
+- `$49`: Pro supporter - short monthly text Q&A / setup guidance.
 
 ## About the Author
 
 Built by Mikhail Kuznetsov (`ekkonwork`).
 
-I build practical AI tooling around image workflows, including ComfyUI custom nodes,
-metadata automation, and production-focused workflow improvements.
+I am a ComfyUI Pipeline / GenAI engineer focused on production image workflows.
+Background highlights from my resume:
+- 2+ years in Generative AI R&D and freelance project work.
+- Built and operated ComfyUI pipelines on 24+ H20 GPUs (production/test clusters).
+- 30+ commercial projects (VTON, LoRA, marketing image workflows).
+- Built batch auto-tagging pipelines (500+ images per run with metadata automation).
 Open to collaboration and work opportunities in AI tooling and automation.
 
 ## Hire Me
 
 - English: `B2` (text-first communication).
-- Hiring (full-time/long-term): prefer written communication or Russian-speaking teams for live calls.
+- Hiring (full-time/long-term): prefer written communication; for live calls, Russian-speaking teams are preferred.
 - Project work: open to worldwide async collaboration.
+- Email: `ekkonwork@gmail.com`
+- Telegram: `@Mikhail_ML_ComfyUI`
 - LinkedIn: `https://www.linkedin.com/in/mikhail-kuznetsov-14304433b`
 - Boosty: `https://boosty.to/ekkonwork/donate`
 

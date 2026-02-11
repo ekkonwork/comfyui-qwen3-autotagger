@@ -32,3 +32,6 @@ STATUS.txt
 *_cell.txt
 notebook_code_cells.txt
 seedvr2_code_cells.txt
+RESUME_EXTRACT.md
+.vendor_lib/
+Резюме ComfyPipelineEngineer.pdf
