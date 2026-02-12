@@ -116,7 +116,7 @@ If you already have the model downloaded, place it under:
 Then in the node set:
 
 - `auto_download = false`
-- `local_model = LLM/<YourModelFolder>` (the same folder you choose in the node dropdown)
+- `local_model = LLM/<YourModelFolder>` or `llm/<YourModelFolder>` (exactly as shown in the node dropdown)
 - or use `local_model_path` for a custom location
 
 ## Support
@@ -128,7 +128,6 @@ If this node saves you time, you can support development on Boosty:
 [![Donate on Boosty](https://img.shields.io/badge/Donate-Boosty-F15F2C?style=for-the-badge)](https://boosty.to/ekkonwork/donate)
 
 - Boosty (donate): `https://boosty.to/ekkonwork/donate`
-- LinkedIn: `https://www.linkedin.com/in/mikhail-kuznetsov-14304433b`
 
 Suggested tiers for an English-speaking audience (USD):
 
