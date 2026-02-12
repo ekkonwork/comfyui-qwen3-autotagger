@@ -1,4 +1,4 @@
-﻿[project]
+[project]
 name = "qwen3-vl-autotagger"
 version = "0.1.0"
 description = "ComfyUI node that generates Adobe Stock-style metadata with Qwen3-VL."
@@ -25,3 +25,4 @@ PublisherId = "ekkonwork"
 DisplayName = "Qwen3 VL AutoTagger"
 # Icon = ""  # Optional: path to 256x256 icon
 # Banner = ""  # Optional: path to banner image
+

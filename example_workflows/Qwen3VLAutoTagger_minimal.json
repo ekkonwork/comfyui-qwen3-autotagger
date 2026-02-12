@@ -1,6 +1,6 @@
 {
-  "last_node_id": 3,
-  "last_link_id": 2,
+  "last_node_id": 2,
+  "last_link_id": 1,
   "nodes": [
     {
       "id": 1,
@@ -65,9 +65,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "links": [
-            2
-          ],
+          "links": null,
           "slot_index": 0
         },
         {
@@ -121,35 +119,6 @@
         "jpg",
         "qwen3_autotag"
       ]
-    },
-    {
-      "id": 3,
-      "type": "SaveImage",
-      "pos": [
-        880,
-        0
-      ],
-      "size": [
-        300,
-        110
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 2
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "SaveImage"
-      },
-      "widgets_values": [
-        "qwen3_autotag"
-      ]
     }
   ],
   "links": [
@@ -158,14 +127,6 @@
       1,
       0,
       2,
-      0,
-      "IMAGE"
-    ],
-    [
-      2,
-      2,
-      0,
-      3,
       0,
       "IMAGE"
     ]
