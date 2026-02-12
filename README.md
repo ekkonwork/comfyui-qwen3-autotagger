@@ -12,6 +12,7 @@ Generate Adobe Stock-style title + keywords with Qwen3-VL and embed XMP metadata
 - Auto-tags images (title + ~60 keywords)
 - Saves tagged images with XMP metadata when `write_xmp` is enabled (no `SaveImage` needed)
 - Headless/API workflow included
+- Auto-downloads `Qwen/Qwen3-VL-8B-Instruct` on first run when `auto_download=true` (default)
 - Optional 4-bit quantization (CUDA)
 
 ## Screenshots
@@ -20,7 +21,7 @@ Node UI
 ![Node UI](assets/Node_only_screen.png)
 
 Workflow Example
-![Workflow Example](assets/Workflow_Screen.png)
+![Workflow Example](assets/Workflow_Screen_new.png)
 
 Embedded XMP Metadata
 ![Metadata Screenshot](assets/metadata_screenshot.png)
@@ -66,8 +67,10 @@ The node ships with documentation (Node Docs). Open the Node Docs panel or hover
 - `max_new_tokens` (INT): Generation length.
 - `temperature`, `top_p`, `repetition_penalty`: Sampling controls.
 - `attempts` (INT): Retry count if JSON is invalid.
-- `min_pixels`, `max_pixels` (INT): Vision resize constraints.
-- `allow_resize` (BOOLEAN): Allow processor to resize images to valid patch sizes.
+- `min_pixels`, `max_pixels` (INT): Vision resize constraints by total pixel budget (area), not by max side length.
+- Important: `max_pixels` is the total area `W*H`, so for about `1024` px on the long side (near-square) use `max_pixels=1024*1024` (`1048576`), not `1024`.
+- Current defaults: `min_pixels=200704`, `max_pixels=571536` (about `756x756` area for square images).
+- `allow_resize` (BOOLEAN): Allow processor to resize images to valid patch sizes (recommended to prevent OOM on very large inputs).
 - `model_id` (STRING): Hugging Face model ID (default `Qwen/Qwen3-VL-8B-Instruct`).
 - `auto_download` (BOOLEAN): Allow downloading the model on first run.
 - `local_model` (CHOICE): Select a local model folder from `models/LLM` or `models/llm` (or `(manual)`).
@@ -97,7 +100,8 @@ If you set a custom `output_dir` outside ComfyUI's output folder, the UI preview
 
 ## Model Download Size
 
-The default model (`Qwen/Qwen3-VL-8B-Instruct`) downloads about 17.5 GB of weights in total (roughly 16.3 GiB).
+By default (`auto_download=true`), the node automatically downloads `Qwen/Qwen3-VL-8B-Instruct` on first run.
+The download size is about 17.5 GB of weights in total (roughly 16.3 GiB).
 
 ## Performance
 

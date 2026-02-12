@@ -383,7 +383,7 @@ class Qwen3VLAutoTagger:
                         "min": 64 * 28 * 28,
                         "max": 1024 * 28 * 28,
                         "step": 28 * 28,
-                        "tooltip": "Minimum vision resolution budget.",
+                        "tooltip": "Minimum vision pixel budget (total area, not max side length).",
                     },
                 ),
                 "max_pixels": (
@@ -393,14 +393,14 @@ class Qwen3VLAutoTagger:
                         "min": 256 * 256,
                         "max": 1536 * 1536,
                         "step": 1,
-                        "tooltip": "Maximum vision resolution budget.",
+                        "tooltip": "Maximum vision pixel budget (total area, not max side length).",
                     },
                 ),
                 "allow_resize": (
                     "BOOLEAN",
                     {
                         "default": True,
-                        "tooltip": "Allow processor to resize images to valid patch sizes.",
+                        "tooltip": "Allow processor to resize images to valid patch sizes and pixel budget.",
                     },
                 ),
                 "model_id": (

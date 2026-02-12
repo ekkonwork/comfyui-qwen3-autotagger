@@ -11,9 +11,9 @@ Generates Adobe Stock-style metadata (title + keywords) from an input image usin
 - `top_p`: Nucleus sampling.
 - `repetition_penalty`: Discourage repeats.
 - `attempts`: Retry count if JSON is invalid.
-- `min_pixels`: Minimum vision resolution budget.
-- `max_pixels`: Maximum vision resolution budget.
-- `allow_resize`: Allow processor to resize images to valid patch sizes.
+- `min_pixels`: Minimum vision pixel budget (total area, not max side length).
+- `max_pixels`: Maximum vision pixel budget (total area, not max side length).
+- `allow_resize`: Allow processor to resize images to valid patch sizes and pixel budget.
 - `model_id`: HF model id (used when auto-download is enabled).
 - `auto_download`: Allow downloading the model from Hugging Face on first run.
 - `local_model`: Select a local model folder from `models/LLM` (or `models/llm`).
@@ -42,3 +42,4 @@ Generates Adobe Stock-style metadata (title + keywords) from an input image usin
 - If `exiftool` is missing, images are saved without XMP metadata.
 - If `output_dir` is outside ComfyUI output, UI preview may not show saved images.
 - You can run `python install.py` on Linux to auto-install exiftool (uses apt-get).
+- For very large images (for example 18 MP), keep `allow_resize=true` and lower `max_pixels` to reduce OOM risk.
