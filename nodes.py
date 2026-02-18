@@ -13,12 +13,21 @@ import torch
 from PIL import Image
 
 try:
-    from transformers import Qwen3VLForConditionalGeneration, AutoProcessor, AutoModelForCausalLM, BitsAndBytesConfig
-except Exception:  # pragma: no cover - fallback for older transformers
-    Qwen3VLForConditionalGeneration = None
+    from transformers import AutoProcessor, BitsAndBytesConfig
+except Exception as e:  # pragma: no cover - fallback for older transformers
     AutoProcessor = None
-    AutoModelForCausalLM = None
     BitsAndBytesConfig = None
+    _transformers_import_error = e
+else:
+    _transformers_import_error = None
+
+try:
+    from transformers import Qwen3VLForConditionalGeneration
+except Exception as e:  # pragma: no cover - fallback for older transformers
+    Qwen3VLForConditionalGeneration = None
+    _qwen3vl_import_error = e
+else:
+    _qwen3vl_import_error = None
 
 try:
     from qwen_vl_utils import process_vision_info
@@ -169,9 +178,15 @@ def _get_model_and_processor(
         return MODEL_CACHE[cache_key]
 
     if AutoProcessor is None:
-        raise RuntimeError("transformers is not available in this environment")
+        raise RuntimeError(f"transformers is not available in this environment: {_transformers_import_error}")
     if process_vision_info is None:
         raise RuntimeError(f"qwen-vl-utils is not available: {_qwen_import_error}")
+    if Qwen3VLForConditionalGeneration is None:
+        raise RuntimeError(
+            "Qwen3VLForConditionalGeneration is not available in this transformers build. "
+            "Please reinstall dependencies from this repo requirements. "
+            f"Import error: {_qwen3vl_import_error}"
+        )
 
     dtype = torch.float16 if device.type == "cuda" else torch.float32
     device_map = "auto" if device.type == "cuda" else None
@@ -189,31 +204,53 @@ def _get_model_and_processor(
                 quant_config = None
 
     model = None
+    primary_load_error = None
     local_files_only = not allow_download
 
-    if Qwen3VLForConditionalGeneration is not None:
+    try:
+        model = Qwen3VLForConditionalGeneration.from_pretrained(
+            model_ref,
+            torch_dtype=dtype,
+            device_map=device_map,
+            quantization_config=quant_config,
+            local_files_only=local_files_only,
+        )
+    except Exception as e:
+        primary_load_error = e
+
+    # Common failure mode on Windows/older bnb stacks: 4-bit init fails.
+    # Retry once without quantization before raising.
+    if model is None and quant_config is not None:
+        print("[Qwen3VLAutoTagger] 4-bit load failed; retrying without 4-bit quantization.")
         try:
             model = Qwen3VLForConditionalGeneration.from_pretrained(
                 model_ref,
                 torch_dtype=dtype,
                 device_map=device_map,
-                quantization_config=quant_config,
+                quantization_config=None,
                 local_files_only=local_files_only,
             )
-        except Exception:
-            model = None
+            print("[Qwen3VLAutoTagger] Model loaded without 4-bit quantization.")
+        except Exception as retry_error:
+            raise RuntimeError(
+                "Failed to load Qwen3-VL model.\n"
+                f"Primary error: {type(primary_load_error).__name__}: {primary_load_error}\n"
+                f"Retry without 4-bit error: {type(retry_error).__name__}: {retry_error}\n"
+                "Try reinstalling dependencies:\n"
+                "pip uninstall -y transformers qwen-vl-utils\n"
+                "pip install -U git+https://github.com/huggingface/transformers\n"
+                "pip install -U qwen-vl-utils accelerate bitsandbytes"
+            ) from retry_error
 
     if model is None:
-        if AutoModelForCausalLM is None:
-            raise RuntimeError("Unable to import Qwen3 classes or AutoModelForCausalLM")
-        model = AutoModelForCausalLM.from_pretrained(
-            model_ref,
-            torch_dtype=dtype,
-            device_map=device_map,
-            trust_remote_code=True,
-            quantization_config=quant_config,
-            local_files_only=local_files_only,
-        )
+        raise RuntimeError(
+            "Failed to load Qwen3-VL model.\n"
+            f"Error: {type(primary_load_error).__name__}: {primary_load_error}\n"
+            "Try reinstalling dependencies:\n"
+            "pip uninstall -y transformers qwen-vl-utils\n"
+            "pip install -U git+https://github.com/huggingface/transformers\n"
+            "pip install -U qwen-vl-utils accelerate bitsandbytes"
+        ) from primary_load_error
 
     if device_map is None:
         model.to(device)

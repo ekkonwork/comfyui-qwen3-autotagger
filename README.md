@@ -170,7 +170,12 @@ Open to collaboration and work opportunities in AI tooling and automation.
 
 - `exiftool` may be missing or not available in `PATH`.
 - CUDA/driver/VRAM setup can differ between machines.
-- `bitsandbytes` may fail to install (this is non-critical: the node has a non-4bit fallback).
+- `bitsandbytes` may fail to install or initialize on some systems. The node now retries model loading without 4-bit automatically.
+- If you see `Qwen3VLForConditionalGeneration is not available`, reinstall dependencies from `requirements.txt` (latest `transformers` is required for Qwen3-VL).
+- If you see model load errors, run:
+  - `pip uninstall -y transformers qwen-vl-utils`
+  - `pip install -U git+https://github.com/huggingface/transformers`
+  - `pip install -U qwen-vl-utils accelerate bitsandbytes`
 - Hugging Face (`HF`) downloads can be unstable due to network/rate limits.
 
 ## License
