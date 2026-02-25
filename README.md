@@ -7,6 +7,13 @@
 
 Generate Adobe Stock-style title + keywords with Qwen3-VL and embed XMP metadata directly into outputs.
 
+## Standalone CLI Version
+
+Need the same tagging pipeline without ComfyUI? Use the standalone CLI project:
+
+[![CLI Repository](https://img.shields.io/badge/Standalone-CLI-1F6FEB?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ekkonwork/qwen3-vl-autotagger-cli)
+[![Run CLI In Colab](https://img.shields.io/badge/Run%20CLI-Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=black)](https://colab.research.google.com/github/ekkonwork/qwen3-vl-autotagger-cli/blob/main/Colab_T4_CLI_Prod.ipynb)
+
 ## Highlights
 
 - Auto-tags images (title + ~60 keywords)
