@@ -136,7 +136,14 @@ If this node saves you time, you can support development on Boosty:
 
 - Boosty (donate): `https://boosty.to/ekkonwork/donate`
 
-Crypto donations (Telegram Wallet):
+### Crypto Donations (Telegram Wallet)
+
+[![Donate via Telegram Wallet](https://img.shields.io/badge/Donate-Telegram%20Wallet-2AABEE?style=for-the-badge&logo=telegram&logoColor=white)](#crypto-donations-telegram-wallet)
+[![Open Telegram Wallet](https://img.shields.io/badge/Open-Wallet-26A17B?style=for-the-badge)](https://t.me/wallet)
+
+![Telegram Wallet QR](assets/telegram_wallet_qr.png)
+
+Scan this QR code in your wallet app to copy the donation address:
 
 - TON: `UQAMPvqduXVWyax325-zqk81rTwNG1bRhCvXPyIs7eeIxEVp`
 - USDT (TON): `UQAMPvqduXVWyax325-zqk81rTwNG1bRhCvXPyIs7eeIxEVp`
