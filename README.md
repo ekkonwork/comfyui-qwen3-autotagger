@@ -136,6 +136,12 @@ If this node saves you time, you can support development on Boosty:
 
 - Boosty (donate): `https://boosty.to/ekkonwork/donate`
 
+Crypto donations (Telegram Wallet):
+
+- TON: `UQAMPvqduXVWyax325-zqk81rTwNG1bRhCvXPyIs7eeIxEVp`
+- USDT (TON): `UQAMPvqduXVWyax325-zqk81rTwNG1bRhCvXPyIs7eeIxEVp`
+- Memo/Tag: check the Wallet receive screen before sending.
+
 Suggested tiers for an English-speaking audience (USD):
 
 - `$7`: Tip jar - support ongoing development.
