@@ -149,24 +149,6 @@ Scan this QR code in your wallet app to copy the donation address:
 - USDT (TON): `UQAMPvqduXVWyax325-zqk81rTwNG1bRhCvXPyIs7eeIxEVp`
 - Memo/Tag: check the Wallet receive screen before sending.
 
-Suggested tiers for an English-speaking audience (USD):
-
-- `$7`: Tip jar - support ongoing development.
-- `$19`: Power user - priority issue replies and workflow help.
-- `$49`: Pro supporter - short monthly text Q&A / setup guidance.
-
-## About the Author
-
-Built by Mikhail Kuznetsov (`ekkonwork`).
-
-I am a ComfyUI Pipeline / GenAI engineer focused on production image workflows.
-Background highlights from my resume:
-- 2+ years in Generative AI R&D and freelance project work.
-- Built and operated ComfyUI pipelines on 24+ H20 GPUs (production/test clusters).
-- 30+ commercial projects (VTON, LoRA, marketing image workflows).
-- Built batch auto-tagging pipelines (500+ images per run with metadata automation).
-Open to collaboration and work opportunities in AI tooling and automation.
-
 ## Hire Me
 
 [![Hire Me](assets/Hire_Me_banner.webp)](https://www.linkedin.com/in/mikhail-kuznetsov-14304433b)
